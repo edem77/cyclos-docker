@@ -1,0 +1,15 @@
+FROM tomcat:9-jdk11
+
+# Set working directory
+WORKDIR /usr/local/tomcat/webapps
+
+# Install curl for downloading the WAR file
+RUN apt-get update && apt-get install -y curl && apt-get clean
+
+# Download Cyclos WAR from Google Drive using curl workaround
+# Replace the file ID below with yours
+RUN curl -L -o cyclos.war "https://drive.google.com/uc?export=download&id=1MWR6SAP2bg0vIC3avJVB5xcAVh2BpUJX"
+
+EXPOSE 8080
+
+CMD ["catalina.sh", "run"]
